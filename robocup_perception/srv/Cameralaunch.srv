@@ -1,0 +1,7 @@
+#camera open
+bool flag
+
+---
+#save image and image name
+bool result
+string name

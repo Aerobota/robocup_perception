@@ -1,0 +1,7 @@
+#image name classify start flag
+string image_name
+bool flag
+
+---
+#class number
+int8 result_num
