@@ -1,0 +1,57 @@
+変更ファイル名
+/etc/hosts
+.bashrc
+
+1.各PC間のIPを固定する
+メイン機:192.168.1.1 ... roscoreをする側
+通信機 :192.168.1.2
+
+2.ホスト名の登録（両方行う）
+$ sudo vi /etc/hosts 
+192.168.1.1	メイン機の名前
+192.168.1.2	通信機の名前
+
+3.pingによる確認
+ping メイン機名（通信機側のPCから）
+ping 通信機名（メイン機側のPCから）
+送れてないなら上記の設定をやり直す
+
+3.両方のPCのファイアウォールの解除
+$ sudo ufw disable
+
+4.bashrcの設定
+メイン機側
+export ROS_HOSTNAME=メイン機ホスト名
+export ROS_MASTER_URI=http://メイン機ホスト名:11311
+
+通信機側
+export ROS_HOSTNAME=通信機ホスト名
+export ROS_MASTER_URI=http://メイン機ホスト名:11311
+
+5.最終確認テスト
+メイン機側
+$ roscore
+
+通信機側
+$ rosrun turtlesim turtlesim_node
+
+メイン機側
+$ rosrun turtlesim turtle_teleop_key
+
+*終わった後にroscoreが起動出来無い問題
+メイン機側
+export ROS_HOSTNAME=メイン機ホスト名
+export ROS_MASTER_URI=http://メイン機ホスト名:11311
+
+通信機側
+export ROS_HOSTNAME=通信機ホスト名
+export ROS_MASTER_URI=http://メイン機ホスト名:11311
+
+これを....
+↓に変更
+
+export ROS_HOSTNAME=localhost
+export ROS_MASTER_URI=http://localhost:11311
+
+ファイアウォールを有効にする
+$　sudo ufw enable
