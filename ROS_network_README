@@ -28,6 +28,9 @@ export ROS_MASTER_URI=http://メイン機ホスト名:11311
 export ROS_HOSTNAME=通信機ホスト名
 export ROS_MASTER_URI=http://メイン機ホスト名:11311
 
+bashの設定を通す
+$ source ~/.bashrc
+
 5.最終確認テスト
 メイン機側
 $ roscore
